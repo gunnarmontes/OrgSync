@@ -1,31 +1,74 @@
 from rest_framework import serializers
 from .models import Organization
-from django.contrib.auth.hashers import make_password, check_password
+
+class OrganizationSerializer(serializers.ModelSerializer):
+    """
+    Read-only serializer for returning org data
+    """
+    class Meta:
+        model = Organization
+        fields = ["id", "name", "email", "slug", "created_at", "updated_at"]
+        read_only_fields = ["id", "slug", "created_at", "updated_at"]
+
 
 class OrganizationRegisterSerializer(serializers.ModelSerializer):
+    """
+    sign-up serializer.
+
+    - Checks that name/email are not already used 
+    """
     password = serializers.CharField(write_only=True, min_length=8)
 
     class Meta:
         model = Organization
-        fields = ['name', 'email', 'password']
+        fields = ["name", "email", "password"]
+
+    def validate_email(self, value: str) -> str:
+        email = value.strip().lower()
+
+        if Organization.objects.filter(email__iexact=email).exists():
+            raise serializers.ValidationError("That email is already registered.")
+        return email
+
+    def validate_name(self, value: str) -> str:
+        name = value.strip()
+        if not name:
+            raise serializers.ValidationError("Organization name cannot be empty.")
+        if Organization.objects.filter(name=name).exists():
+            raise serializers.ValidationError("That organization name is already taken.")
+        return name
 
     def create(self, validated_data):
-        validated_data['password'] = make_password(validated_data['password'])
-        return Organization.objects.create(**validated_data)
+        """
+        use create_user so the password is hashed.
+        """
+        return Organization.objects.create_user(
+            email=validated_data["email"],
+            name=validated_data["name"],
+            password=validated_data["password"],
+        )
 
 
-class OrganizationLoginSerializer(serializers.Serializer):
-    email = serializers.EmailField()
-    password = serializers.CharField(write_only=True)
+from rest_framework import serializers
+from .models import Event
 
-    def validate(self, data):
-        try:
-            org = Organization.objects.get(email=data['email'])
-        except Organization.DoesNotExist:
-            raise serializers.ValidationError("Invalid email or password")
 
-        if not check_password(data['password'], org.password):
-            raise serializers.ValidationError("Invalid email or password")
+class EventSerializer(serializers.ModelSerializer):
+    """
+    serializer for both read/write.
+    """
+    class Meta:
+        model = Event
+        fields = ["id", "description", "date", "time", "location", "created_at"]
+        read_only_fields = ["id", "created_at"]
 
-        data['organization'] = org
-        return data
+    def create(self, validated_data):
+        # Attach the organization from the authenticated user
+        org = self.context["request"].user
+        return Event.objects.create(organization=org, **validated_data)
+
+    def validate_description(self, value: str) -> str:
+        v = value.strip()
+        if not v:
+            raise serializers.ValidationError("Description cannot be empty.")
+        return v

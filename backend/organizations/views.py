@@ -1,53 +1,73 @@
-from rest_framework.views import APIView
+from rest_framework import generics, permissions, status
 from rest_framework.response import Response
-from rest_framework import status, permissions
-
 from .models import Organization
-from .serializers import OrganizationRegisterSerializer, OrganizationLoginSerializer
-from .utility_functions import OrganizationJWTAuthentication  # You'll define this separately
-
-organization_auth = OrganizationJWTAuthentication()
+from .serializers import OrganizationRegisterSerializer, OrganizationSerializer
+from .jwt_issuance import OrgTokenObtainPairSerializer
 
 
-class OrganizationRegisterView(APIView):
+class RegisterOrganizationView(generics.CreateAPIView):
+    """
+    POST /register
+    Creates an Organization and returns org fields + JWT pair.
+    """
+    queryset = Organization.objects.all()
     permission_classes = [permissions.AllowAny]
+    serializer_class = OrganizationRegisterSerializer
 
-    def post(self, request):
-        serializer = OrganizationRegisterSerializer(data=request.data)
-        if serializer.is_valid():
-            org = serializer.save()
-            tokens = organization_auth.generate_org_tokens(org)  # Generates access + refresh JWT
-            return Response({
-                "message": "Organization created",
-                "organization": {
-                    "id": org.id,
-                    "name": org.name,
-                    "email": org.email,
-                    "slug": org.slug
-                },
-                "tokens": tokens
-            }, status=status.HTTP_201_CREATED)
+    def create(self, request, *args, **kwargs):
+        write_serializer = self.get_serializer(data=request.data)
+        write_serializer.is_valid(raise_exception=True)
+        org = write_serializer.save()
 
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        # Issue JWTs with org_id claim
+        refresh = OrgTokenObtainPairSerializer.get_token(org)
+        access = refresh.access_token
+
+        data = OrganizationSerializer(org).data
+        data.update({"refresh": str(refresh), "access": str(access)})
+        headers = self.get_success_headers(write_serializer.data)
+        return Response(data, status=status.HTTP_201_CREATED, headers=headers)
 
 
-class OrganizationLoginView(APIView):
-    permission_classes = [permissions.AllowAny]
+class OrganizationDetailView(generics.RetrieveAPIView):
+    """
+    GET /me
+    Returns the current Organization (from JWT).
+    """
+    serializer_class = OrganizationSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
-    def post(self, request):
-        serializer = OrganizationLoginSerializer(data=request.data)
-        if serializer.is_valid():
-            org = serializer.validated_data['organization']
-            tokens = organization_auth.generate_org_tokens(org)
-            return Response({
-                "message": "Login successful",
-                "organization": {
-                    "id": org.id,
-                    "name": org.name,
-                    "email": org.email,
-                    "slug": org.slug
-                },
-                "tokens": tokens
-            }, status=status.HTTP_200_OK)
+    def get_object(self):
+        return self.request.user
 
-        return Response(serializer.errors, status=status.HTTP_401_UNAUTHORIZED)
+
+from rest_framework import generics, permissions
+from .models import Event
+from .serializers import EventSerializer
+
+
+class EventListCreateView(generics.ListCreateAPIView):
+    """
+    GET  /orgs/events/   -> list events for current org
+    POST /orgs/events/   -> create event for current org
+    """
+    serializer_class = EventSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Event.objects.filter(organization=self.request.user).order_by("date", "time")
+
+
+
+class EventDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    GET    /orgs/events/<id>/
+    PATCH  /orgs/events/<id>/
+    PUT    /orgs/events/<id>/
+    DELETE /orgs/events/<id>/
+    """
+    serializer_class = EventSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Event.objects.filter(organization=self.request.user)
