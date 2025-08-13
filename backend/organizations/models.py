@@ -74,3 +74,30 @@ class Event(models.Model):
 
     def __str__(self) -> str:
         return f"{self.description} @ {self.date} {self.time}"
+    
+
+from django.db import models
+from django.utils import timezone
+from .models import Organization  # already defined in same app
+
+
+class Member(models.Model):
+    """
+    A member that belongs to an Organization.
+    """
+    organization = models.ForeignKey(
+        Organization,
+        on_delete=models.CASCADE,
+        related_name="members",
+    )
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    joined_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ["name"]
+        unique_together = ("organization", "email")  # No duplicate emails within the same org
+
+    def __str__(self):
+        return f"{self.name} ({self.email})"
+

@@ -72,3 +72,36 @@ class EventSerializer(serializers.ModelSerializer):
         if not v:
             raise serializers.ValidationError("Description cannot be empty.")
         return v
+    
+
+
+from rest_framework import serializers
+from .models import Member
+
+
+class MemberSerializer(serializers.ModelSerializer):
+    """
+    Serializer for listing, creating, and updating Members.
+    """
+    class Meta:
+        model = Member
+        fields = ["id", "name", "email", "joined_at"]
+        read_only_fields = ["id", "joined_at"]
+
+    def create(self, validated_data):
+        org = self.context["request"].user
+        return Member.objects.create(organization=org, **validated_data)
+
+    def validate_name(self, value: str) -> str:
+        v = value.strip()
+        if not v:
+            raise serializers.ValidationError("Name cannot be empty.")
+        return v
+
+    def validate_email(self, value: str) -> str:
+        email = value.strip().lower()
+        org = self.context["request"].user
+        if Member.objects.filter(organization=org, email__iexact=email).exists():
+            raise serializers.ValidationError("That email is already a member of this organization.")
+        return email
+

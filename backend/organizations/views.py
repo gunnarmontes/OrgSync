@@ -71,3 +71,36 @@ class EventDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def get_queryset(self):
         return Event.objects.filter(organization=self.request.user)
+    
+
+from rest_framework import generics, permissions
+from .models import Member
+from .serializers import MemberSerializer
+
+
+class MemberListCreateView(generics.ListCreateAPIView):
+    """
+    GET  /orgs/members/   -> list members for current org
+    POST /orgs/members/   -> create member for current org
+    """
+    serializer_class = MemberSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Member.objects.filter(organization=self.request.user).order_by("name")
+
+
+class MemberDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    GET    /orgs/members/<id>/
+    PATCH  /orgs/members/<id>/
+    PUT    /orgs/members/<id>/
+    DELETE /orgs/members/<id>/
+    (scoped to current org)
+    """
+    serializer_class = MemberSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        return Member.objects.filter(organization=self.request.user)
+
