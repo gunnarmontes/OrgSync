@@ -182,6 +182,34 @@ The app will start at http://localhost:5173 and talk to your backend at http://1
 
 
 
+## Future Development Roadmap
+
+### Short-Term Goals 
+
+- **Member Management**
+  - Add role-based access control (e.g., Admin, Editor, Viewer).
+  - Enable CSV import/export for members.
+- **QR Code Feature**
+  - Replace static QR code with dynamically generated codes per organization.
+  - Implement QR code scanning for event check-ins.
+- **Settings**
+  - Give orgs customzation over UI and other settings.
+
+### Mid-Term Goals 
+- **Analytics & Reporting**
+  - Expand data visualizations with real-time updates.
+  - Generate downloadable PDF reports of member activity and event stats.
+- **Email Campaign Integration**
+  - Enable bulk email sending to members.
+  - Include email open/click tracking.
+
+
+### Long-Term Goals 
+- **External Integrations**
+  - Connect with Google Calendar, Outlook, or other scheduling APIs.
+- **Deployment & Scaling**
+  - Migrate from SQLite to PostgreSQL for production.
+  - Deploy on cloud infrastructure (e.g., AWS, Azure, or Heroku).
 
 
 
