@@ -94,6 +94,65 @@ The app will start at http://localhost:5173 and talk to your backend at http://1
 
 ---
 
+### 2) Home Dashboard
+- Shows the signed-in organization’s **name** and **email**.
+- Quick access to Events, Members, QR Code, Analytics.
+- Simple text editor block for future newsletter/event drafting.
+
+**Screenshot**
+- `docs/screenshots/HomeDashBoard.png`
+
+![Home](docs/screenshots/HomeDashBoard.png)
+
+---
+
+### 3) Events
+- **Add Event** modal appears in-page, posts to backend, and refreshes list.
+- Backend returns events filtered and ordered by scope.
+
+**Screenshots**
+
+![Events Blank](docs/screenshots/EventsBlank.png)
+![Add Event Modal](docs/screenshots/EventAddForm.png)
+![Events Filled](docs/screenshots/EventsFilled.png)
+
+
+---
+
+### 4) Members
+- Read-only list of members in the organization.
+
+**Screenshot**
+- `docs/screenshots/OrgSyncBlankMembers.png`
+- `docs/screenshots/OrgSyncFilledMembers.png`
+
+
+![Events Blank](docs/screenshots/OrgSyncBlankMembers.png)
+![Events Filled](docs/screenshots/OrgSyncFilledMembers.png)
+---
+
+### 5) QR Code
+- Displays a **static QR image** that points to a URL.
+- **Download** / **Share** buttons (currently show alerts; wire up later to real actions).
+
+**Screenshot**
+- `docs/screenshots/QRSkeletonDownload.png`
+
+![QR Code](docs/screenshots/QRSkeletonDownload.png)
+
+---
+
+### 6) Analytics
+- **Recharts** vertical bar chart for “Newsletters Sent” (sample data).
+- **D3** animated horizontal bars for “New Members per Month” (sample data with smooth growth animation).
+
+**Screenshots**
+- `docs/screenshots/OrgSyncAnalytics.png`  
+
+![Analytics — Newsletters](docs/screenshots/OrgSyncAnalytics.png)
+
+---
+
 
 
 
