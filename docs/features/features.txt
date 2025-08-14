@@ -1,0 +1,63 @@
+Feature Documentation
+======================
+
+Currently Working Features
+--------------------------
+- **Organization Registration & Login**
+  - Secure JWT-based authentication for organizations.
+  - Ability to create a new organization account with name, email, and password.
+  - Login functionality with token storage in browser localStorage.
+
+- **Organization Dashboard (Home Screen)**
+  - Displays organization name and email.
+  - Contains quick navigation to Events, Members, and other features.
+  - Includes basic text editor for quick notes or event descriptions.
+
+- **Events Feature**
+  - Add new events via model form (description, date, time, location).
+
+- **Members Feature**
+  - Displays a list of organization members with name, email, and join date.
+  - Backend integration for updating member list.
+
+- **QR Code Feature (Skeleton)**
+  - Static QR code image pointing to a set URL.
+  - Buttons to "Download" or "Share" QR code trigger placeholder alerts.
+
+- **Analytics Feature**
+  - Static bar chart (Recharts) showing newsletters sent per month.
+  - D3-based animated horizontal bar chart simulating new members per month.
+
+Known Issues or Limitations
+---------------------------
+- **Event Form**
+  - Location field was previously not persisting correctly 
+- **Id Numbers**
+  - Id numbers in frontend cards persisting accross all members or events
+- **CORS Issues**
+  - Frontend API requests may be blocked if CORS is not configured properly on backend.
+- **Authentication State**
+  - No silent token refresh unless triggered by ProtectedRoute logic.
+- **Static QR Code**
+  - QR code is currently hardcoded; no dynamic generation yet.
+
+Future Planned Features
+-----------------------
+
+- **Member Management**
+  - Import/export members via CSV.
+  - Member search and filtering.
+
+- **Email Campaign Integration**
+  - Bulk email sending to members.
+  - Email analytics for open/click rates.
+
+- **Analytics Enhancements**
+  - Real-time charts using live backend data.
+  - Exportable PDF reports.
+
+- **Security Enhancements**
+  - Switch from SQLite to PostgreSQL in production.
+
+- **Deployment & Scaling**
+  - Deploy backend and frontend to cloud services.
