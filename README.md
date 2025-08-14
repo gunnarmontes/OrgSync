@@ -88,8 +88,6 @@ The app will start at http://localhost:5173 and talk to your backend at http://1
 - Axios interceptor attaches `Authorization: Bearer <token>` automatically.
 
 **Screenshots**
-- `docs/screenshots/login.png`  
-- `docs/screenshots/register.png`
 
 ![Login](docs/screenshots/OrgSyncLogin.png)
 ![Register](docs/screenshots/OrgSyncRegister.png)
