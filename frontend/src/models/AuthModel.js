@@ -31,7 +31,7 @@ class AuthModel {
     if (data?.access) localStorage.setItem(ACCESS_TOKEN, data.access);
     if (data?.refresh) localStorage.setItem(REFRESH_TOKEN, data.refresh);
 
-    return { access: data?.access ?? null, refresh: data?.refresh ?? null };
+    return { access: data?.access ?? null, refresh: data?.refresh ?? null }
   }
 
   /**
@@ -44,7 +44,7 @@ class AuthModel {
 
     try {
       await api.post("/orgs/token/verify/", { token });
-      return true;
+      return true
     } catch {
       return false;
     }
@@ -59,7 +59,7 @@ class AuthModel {
     if (!refresh) return null;
 
     try {
-      const { data } = await api.post("/orgs/token/refresh/", { refresh });
+      const { data } = await api.post("/orgs/token/refresh/", { refresh })
       if (data?.access) {
         localStorage.setItem(ACCESS_TOKEN, data.access);
         return data.access;
@@ -74,7 +74,7 @@ class AuthModel {
    * Fetch current org profile.
    */
   async me() {
-    const { data } = await api.get("/orgs/me/");
+    const { data } = await api.get("/orgs/me/")
     return data;
   }
 
@@ -87,20 +87,18 @@ class AuthModel {
   }
 
   /**
-   * Quick client-side auth check.
+   * client-side auth check.
    */
   isAuthenticated() {
     return Boolean(localStorage.getItem(ACCESS_TOKEN) || localStorage.getItem(REFRESH_TOKEN));
   }
 
-  /**
-   * Private helper: pick org fields from register response.
-   */
+
   pickOrg(data) {
     if (!data) return null;
     const { id, name, email, slug, created_at, updated_at } = data;
     if (id === undefined && name === undefined) return null;
-    return { id, name, email, slug, created_at, updated_at };
+    return { id, name, email, slug, created_at, updated_at }
   }
 }
 
