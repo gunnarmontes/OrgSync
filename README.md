@@ -180,6 +180,11 @@ The app will start at http://localhost:5173 and talk to your backend at http://1
 - **[D3.js](https://d3js.org/)** – Data-driven document manipulation for custom visualizations.
 
 
+## Demo Video
+
+
+[![Watch the video]](docs/video/demovideo.mp4)
+
 
 
 ## Future Development Roadmap
