@@ -23,3 +23,15 @@ The purpose of OrgSync is to streamline organizational workflows, enabling teams
    ```bash
    git clone https://github.com/yourusername/OrgSync.git
    cd OrgSync/backend
+
+## 2. Create and activate a virtual environment
+
+> Make sure you have **Python 3.11+** installed.
+
+### macOS / Linux
+```bash
+python3 -m venv env
+source env/bin/activate
+
+
+
