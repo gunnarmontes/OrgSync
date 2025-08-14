@@ -81,6 +81,22 @@ npm run dev
 The app will start at http://localhost:5173 and talk to your backend at http://127.0.0.1:8000 via the VITE_API_URL environment variable. 
 
 
+##  Feature List 
+
+### 1) Authentication (Login & Register)
+- Secure org-based authentication using JWT.
+- Axios interceptor attaches `Authorization: Bearer <token>` automatically.
+
+**Screenshots**
+- `docs/screenshots/login.png`  
+- `docs/screenshots/register.png`
+
+![Login](docs/screenshots/OrgSyncLogin.png)
+![Register](docs/screenshots/OrgSyncRegister.png)
+
+---
+
+
 
 
 
