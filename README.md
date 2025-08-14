@@ -32,6 +32,13 @@ The purpose of OrgSync is to streamline organizational workflows, enabling teams
 ```bash
 python3 -m venv env
 source env/bin/activate
+```
+### Windows
+```bash
+python -m venv env
+.\env\Scripts\Activate.ps1
+```
+
 
 
 
