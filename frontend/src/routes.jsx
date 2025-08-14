@@ -13,6 +13,7 @@ import Home from "./pages/Home.jsx";
 import Events from "./pages/Events.jsx";
 import Members from "./pages/Members.jsx";
 import QRCode from "./pages/QRCode.jsx";
+import Analytics from "./pages/Analytics.jsx";
 
 
 const router = createBrowserRouter([
@@ -33,12 +34,14 @@ const router = createBrowserRouter([
     element: <ProtectedRoute />,
     children: [
       {
-        element: <AppLayout />, // should render <NavBar /> and <Outlet />
+        element: <AppLayout />, 
         children: [
           { path: "/home", element: <Home /> },
           { path: "/events", element: <Events /> },
           { path: "/members", element: <Members /> },
           { path: "/qr", element: <QRCode /> },
+          { path: "/analytics", element: <Analytics /> },
+          
 
         ],
       },

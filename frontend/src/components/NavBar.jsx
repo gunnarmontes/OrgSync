@@ -21,8 +21,16 @@ export default function AppNav() {
       <NavLink to="/members" className={({ isActive }) => (isActive ? active : base)}>
         Members
       </NavLink>
-      <button className={base} type="button">Analytics</button>
-      <button className={base} type="button">Settings</button>
+      <NavLink to="/analytics" className={({ isActive }) => (isActive ? active : base)}>
+        Analytics
+      </NavLink>
+      <NavLink 
+        to="/settings" 
+        onClick={() => alert("Settings feature is under development")}
+        className={({ isActive }) => (isActive ? active : base)}
+      >
+        Settings
+      </NavLink>
     </nav>
   );
 }

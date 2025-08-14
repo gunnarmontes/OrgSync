@@ -1,4 +1,3 @@
-// src/models/EventApi.js
 import api from "../api";
 
 const EventModel = {

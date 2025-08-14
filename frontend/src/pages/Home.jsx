@@ -56,12 +56,20 @@ export default function Home() {
               placeholder="Start Writing..."
             />
             <div className="flex gap-4 mt-2">
-              <button className="bg-blue-700 text-white py-1 px-3 rounded hover:bg-blue-600">
+              <Link
+                to="/events/new"
+                onClick={() => alert("Event creation feature from home is under development")}
+                className="bg-blue-700 text-white text-center py-1 px-3 rounded hover:bg-blue-600"
+              >
                 Create Event
-              </button>
-              <button className="bg-blue-700 text-white py-1 px-3 rounded hover:bg-blue-600">
+              </Link>
+              <Link
+                to="/email"
+                onClick={() => alert("Email feature is under development")}
+                className="bg-blue-700 text-white text-center py-1 px-3 rounded hover:bg-blue-600"
+              >
                 Send Email
-              </button>
+              </Link>
             </div>
           </div>
 
@@ -73,21 +81,31 @@ export default function Home() {
             >
               Events
             </Link>
-            <button className="bg-blue-700 text-white py-2 rounded hover:bg-blue-600">
+            <Link
+              to="/qr"
+              className="bg-blue-700 text-white text-center py-2 rounded hover:bg-blue-600"
+            >
               QR Code
-            </button>
+            </Link>
             <Link
               to="/members"
               className="bg-blue-700 text-white text-center py-2 rounded hover:bg-blue-600"
             >
               Members
             </Link>
-            <button className="bg-blue-700 text-white py-2 rounded hover:bg-blue-600">
+            <Link
+              to="/analytics"
+              className="bg-blue-700 text-white text-center py-2 rounded hover:bg-blue-600"
+            >
               Analytics
-            </button>
-            <button className="bg-blue-700 text-white py-2 rounded hover:bg-blue-600">
+            </Link>
+            <Link
+              to="/settings"
+              onClick={() => alert("Settings feature is under development")}
+              className="bg-blue-700 text-white text-center py-2 rounded hover:bg-blue-600"
+            >
               Settings
-            </button>
+            </Link>
           </div>
         </div>
       </div>

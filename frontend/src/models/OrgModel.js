@@ -1,4 +1,3 @@
-// src/models/OrgApi.js
 import api from "../api";
 
 const OrgModel= {
