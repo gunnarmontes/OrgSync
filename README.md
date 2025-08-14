@@ -23,3 +23,71 @@ The purpose of OrgSync is to streamline organizational workflows, enabling teams
    ```bash
    git clone https://github.com/yourusername/OrgSync.git
    cd OrgSync/backend
+
+## 2. Create and activate a virtual environment
+
+> Make sure you have **Python 3.11+** installed.
+
+### macOS / Linux
+```bash
+python3 -m venv env
+source env/bin/activate
+```
+### Windows
+```bash
+python -m venv env
+.\env\Scripts\Activate.ps1
+```
+
+## 3. Install backend dependencies
+
+With your virtual environment activated, install all Python dependencies from `requirements.txt`.
+
+```bash
+pip install -r requirements.txt
+```
+
+## 4. Set up the database
+
+Apply database migrations to create all required tables.
+
+### macOS / Linux / Windowa
+```bash
+python manage.py migrate
+```
+
+## 5. Start the backend server
+
+Launch the Django development server.
+
+### macOS / Linux / Windows
+```bash
+python manage.py runserver
+```
+
+The API will be available at http://127.0.0.1:8000/.
+Keep this terminal running while you work on the frontend.
+
+## 6. Set up the frontend
+
+Open a **new terminal** for the frontend (keep the backend running).
+
+### macOS / Linux / Windows 
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
+The app will start at http://localhost:5173 and talk to your backend at http://127.0.0.1:8000 via the VITE_API_URL environment variable. 
+
+
+
+
+
+
+
+
+
+
+
+
