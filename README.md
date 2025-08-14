@@ -153,6 +153,34 @@ The app will start at http://localhost:5173 and talk to your backend at http://1
 
 ---
 
+## Tech Stack
+
+**Development & Tooling**
+- **[Postman](https://www.postman.com/)** – API testing and debugging.
+- **[Lucidchart](https://www.lucidchart.com/)** – UML diagram and flowchart tool for system design and architecture planning.
+  Link https://lucid.app/lucidchart/32714479-ae27-4080-b3e1-188509e2d923/edit?viewport_loc=3299%2C168%2C1443%2C841%2CHWEp-vi-RSFO&invitationId=inv_bc74c5c6-9097-42f9-a05c-46772ba8ea1c
+- **[Figma](https://figma.com/)** – Design and prototyping tool for UI/UX workflows.
+  Link: https://www.figma.com/design/4iPDWN0hGtAl8Moz5OVbYt/Newsletter?node-id=0-1&t=8wAUmjnbXVATMgcR-1
+
+**Backend**
+- **[Django](https://www.djangoproject.com/)** – Backend Python web framework 
+- **[Django REST Framework (DRF)](https://www.django-rest-framework.org/)** – API toolkit for RESTful endpoints.
+- **[SQLite](https://www.sqlite.org/)** – Lightweight database used for local development.
+- **[JWT Authentication](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)** – Secure token-based auth
+
+**Frontend**
+- **[React](https://reactjs.org/)** – JavaScript library for building user interfaces.
+- **[Vite](https://vitejs.dev/)** – Frontend tooling for react app
+- **[Tailwind CSS](https://tailwindcss.com/)** – CSS framework for fast ui designs.
+- **[React Router v7](https://reactrouter.com/)** – Declarative routing for React applications.
+- **[Axios](https://axios-http.com/)** – HTTP client for API requests.
+
+**Data Visualization**
+- **[Recharts](https://recharts.org/en-US/)** – Charting library for React components.
+- **[D3.js](https://d3js.org/)** – Data-driven document manipulation for custom visualizations.
+
+
+
 
 
 
