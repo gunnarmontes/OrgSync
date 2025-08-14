@@ -1,25 +1,32 @@
-import React, { useState } from "react";
 import axios from "axios";
 import { ACCESS_TOKEN } from "./constants";
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL,
-    timeout: 15000
-})
+  baseURL: import.meta.env.VITE_API_URL,
+  timeout: 15000
+});
 
-api.interceptors.request.use(function (config) {
-    
-    const token = localStorage.getItem(ACCESS_TOKEN)
+const PUBLIC_PATHS = [
+  "/orgs/register/",
+  "/orgs/login/",
+  "/orgs/token/refresh/",
+  "/orgs/token/verify/",
+];
 
-    if (token) {
-        config.headers.Authorization = `Bearer ${token}`
+api.interceptors.request.use(
+  function (config) {
+    // Only attach Authorization header if not in public paths
+    if (!PUBLIC_PATHS.includes(config.url)) {
+      const token = localStorage.getItem(ACCESS_TOKEN);
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
     }
-    
     return config;
-  }, function (error) {
-
+  },
+  function (error) {
     return Promise.reject(error);
-  });
+  }
+);
 
-
-export default api
+export default api;
