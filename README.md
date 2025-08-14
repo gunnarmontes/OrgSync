@@ -210,6 +210,16 @@ The app will start at http://localhost:5173 and talk to your backend at http://1
 - **Deployment & Scaling**
   - Migrate from SQLite to PostgreSQL for production.
   - Deploy on cloud infrastructure (e.g., AWS, Azure, or Heroku).
+ 
+
+## Contact Me
+
+
+- **Name:** Gunnar Montes  
+- **Email:** [gunnarmontes@vt.edu](mailto:gunnarmontes@vt.edu)  
+
+ 
+
 
 
 
