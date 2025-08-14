@@ -14,7 +14,10 @@ export default function AppNav() {
       <NavLink to="/events" className={({ isActive }) => (isActive ? active : base)}>
         Events
       </NavLink>
-      <button className={base} type="button">QR Code</button>
+      <NavLink to="/qr" className={({ isActive }) => (isActive ? active : base)}>
+        QR Code
+      </NavLink>
+
       <NavLink to="/members" className={({ isActive }) => (isActive ? active : base)}>
         Members
       </NavLink>

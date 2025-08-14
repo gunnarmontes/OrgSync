@@ -12,6 +12,8 @@ import Register from "./pages/Register.jsx";
 import Home from "./pages/Home.jsx";
 import Events from "./pages/Events.jsx";
 import Members from "./pages/Members.jsx";
+import QRCode from "./pages/QRCode.jsx";
+
 
 const router = createBrowserRouter([
   // redirect root to login
@@ -36,6 +38,8 @@ const router = createBrowserRouter([
           { path: "/home", element: <Home /> },
           { path: "/events", element: <Events /> },
           { path: "/members", element: <Members /> },
+          { path: "/qr", element: <QRCode /> },
+
         ],
       },
     ],
