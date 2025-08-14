@@ -1,0 +1,37 @@
+# Backend Endpoint Documentation
+
+## Authentication & Organization Management
+- **POST /orgs/register/**  
+  Registers a new organization account.  
+  **Body:** `{ "name": string, "email": string, "password": string }`  
+  **Returns:** Organization details + JWT tokens (`access`, `refresh`).
+
+- **POST /orgs/login/**  
+  Authenticates an existing organization.  
+  **Body:** `{ "email": string, "password": string }`  
+  **Returns:** JWT tokens (`access`, `refresh`).
+
+- **GET /orgs/me/**  
+  Retrieves the authenticated organization's profile.  
+  **Auth:** Bearer access token.
+
+## Event Management
+- **GET /orgs/events/**  
+  Lists events for the authenticated organization.  
+  **Query Params:** `scope=planned|previous`  
+  **Auth:** Bearer access token.
+
+- **POST /orgs/events/**  
+  Creates a new event for the organization.  
+  **Body:** `{ "description": string, "date": "YYYY-MM-DD", "time": "HH:MM", "location": string }`  
+  **Auth:** Bearer access token.
+
+## Member Management
+- **GET /orgs/members/**  
+  Lists members of the authenticated organization.  
+  **Auth:** Bearer access token.
+
+- **POST /orgs/members/**  
+  Creates a new member in the organization.  
+  **Body:** `{ "name": string, "email": string }`  
+  **Auth:** Bearer access token.
