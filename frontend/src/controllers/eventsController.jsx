@@ -32,7 +32,7 @@ export default function eventsController() {
   }, [tab, fetchEvents]);
 
   const createEvent = useCallback(async (payload) => {
-    const created = await EventApi.create(payload);
+    const created = await EventModel.create(payload);
     await fetchEvents(tab);
     return created;
   }, [fetchEvents, tab]);
